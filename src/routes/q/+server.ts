@@ -27,7 +27,7 @@ const model = genAI.getGenerativeModel({
 
 async function run({ g, t, s }: { s: string; t: string; g: string }) {
 	const result =
-		await model.generateContent(`Perfectly following the format the format of the first, edit the second.
+		await model.generateContent(`Perfectly following the format the format of the first quiz, edit the second quiz.
 Fix spelling, grammar and any other thing where you see fit.
 Make all concise.
 
@@ -65,9 +65,9 @@ This question is not good, it has more than one correct option
     c) 3
     d) 9
 
-Respond with ONLY the edited questions    
+Respond with ONLY the edited version of the second quiz    
     
-The first:
+The first quiz:
 
 """
 1. When you take care of your body you will look attractive (a) True (b) False
@@ -112,7 +112,7 @@ The first:
 
 """
 
-The second:
+The second quiz:
 
 """
 ${t}
