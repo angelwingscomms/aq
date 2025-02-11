@@ -5,7 +5,7 @@
   let loading = false;
 
   const grades = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
-  const subjects = ['Mathematics', 'English Language', 'Basic Science and Technology', 'Social Studies', 'Physical and Health Education', 'Religious and National Values', 'Cultural and Creative Arts', 'PreVocational Studies', 'French', 'Yoruba', 'Igbo', 'Hausa'];
+  const subjects = ['Mathematics', 'English Language', 'Basic Science and Technology', 'Social Studies', 'Physical and Health Education', 'National Values', 'Cultural and Creative Arts', 'PreVocational Studies', 'French', 'Yoruba', 'Igbo', 'Hausa'];
 
   async function sendText() {
     loading = true;
