@@ -31,7 +31,7 @@
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${subject} ${grade} midterm 2025.docx`;
+    a.download = `${subject} - grade ${grades.indexOf(grade) + 1} - midterm exam - 2nd term - 2025.docx`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
