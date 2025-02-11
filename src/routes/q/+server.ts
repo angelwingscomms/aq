@@ -120,7 +120,7 @@ ${t}
 	console.log('rrt', result.response.text());
 	const q = result.response.text();
 	return patchDocument({
-		data: readFileSync('./files/template.docx'),
+		data: readFileSync(`./files/template${g === "ONE" ? "-cc" : ""}.docx`),
 		outputType: 'blob',
 		keepOriginalStyles: true,
 		patches: {
