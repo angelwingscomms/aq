@@ -2,11 +2,13 @@
   let text = '';
   let grade = 'ONE';
   let subject = 'Mathematics';
+  let loading = false;
 
   const grades = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
-  const subjects = ['Mathematics', 'English Language', 'Basic Science and Technology', 'Social Studies', 'Physical and Health Education', 'Religious and National Values', 'Cultural and Creative Arts', 'French', 'Yoruba', 'Igbo', 'Hausa'];
+  const subjects = ['Mathematics', 'English Language', 'Basic Science and Technology', 'Social Studies', 'Physical and Health Education', 'Religious and National Values', 'Cultural and Creative Arts', 'PreVocational Studies', 'French', 'Yoruba', 'Igbo', 'Hausa'];
 
   async function sendText() {
+    loading = true;
     const data = {
       s: subject,
       g: grade,
@@ -23,6 +25,7 @@
 
     if (!response.ok) {
       console.error('Error sending text:', response.status);
+      loading = false;
       return;
     }
 
@@ -36,6 +39,7 @@
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
+    loading = false;
   }
 
   function pasteText() {
@@ -75,11 +79,16 @@
     >
       Paste
     </button>
-    <button 
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      on:click={sendText}
-    >
-      Send
-    </button>
+    {#if loading}
+      <div>Loading...</div>
+    {:else}
+      <button 
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        on:click={sendText}
+      >
+        Send
+      </button>
+    {/if}
   </div>
 </div>
+```
