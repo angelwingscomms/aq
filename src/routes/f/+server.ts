@@ -43,7 +43,7 @@ const f = async ({ c, g }: { c: string; g: string }) => {
 	const exams = JSON.parse(
 		(
 			await file_model.generateContent(
-				`create a JSON array of exams, where each exam object has 'subject' and 'content', the subject being the name of that exam, and the content being the entire exam as a string. Use exactly these subjects were relevant: 'Mathematics', 'English Language', 'Basic Science and Technology', 'Computer Science', 'Social Studies', 'Physical and Health Education', 'National Values', 'Cultural and Creative Arts', 'PreVocational Studies', 'Music', 'French', 'History', 'Religion Studies'
+				`create a JSON array of EVERY exam given, where each exam object has 'subject' and 'content', the subject being the name of that exam, and the content being the entire exam as a string. Use exactly these subjects were relevant: 'Mathematics', 'English Language', 'Basic Science and Technology', 'Computer Science', 'Social Studies', 'Physical and Health Education', 'National Values', 'Cultural and Creative Arts', 'PreVocational Studies', 'Music', 'French', 'History', 'Religion Studies'
 
 				The exams:
 
