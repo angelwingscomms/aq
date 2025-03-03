@@ -25,49 +25,39 @@ const model = genAI.getGenerativeModel({
 	}
 });
 
-async function run({ g, t, s }: { s: string; t: string; g: string }) {
+async function run({ g, t, s, n, sn, en }: { s: string; t: string; g: string; n?: number; sn?: number; en?: number }) {
+	const numQuestionsClause = n ? `
+	8. **Number of Questions:** Create ${n} questions.` : '';
+	const numShortAnswerQuestionsClause = sn ? `
+	9. **Number of Short Answer Questions:** Create ${sn} short answer questions.` : '';
+	const numEssayQuestionsClause = en ? `
+	10. **Number of Essay Questions:** Create ${en} essay questions.` : '';
 	const result =
-		await model.generateContent(`Perfectly following the format the format of the first quiz, edit the second quiz.
-Fix spelling, grammar and any other thing where you see fit.
-Make all concise.
+		await model.generateContent(`Generate a quiz from the following text, adhering to these rules:
 
-let blanks (i.e "_____" in questions like "________ is called the light of the body (a)...") be a single underscore, e.g: "_ is called the light of the body (a)...". DO NOT do this for  questions in Section B and Section C
+1. **Formatting:**  Mimic the format of the provided example quiz.  Use single underscores "_" for blanks in questions (except in sections with headings), enclose options in brackets (e.g., (a), (b)), and place questions and options on the same line. Do not end questions with periods, but question marks are acceptable.
 
-NEVER use a full stop at the end a question. e.g
-"_ is called the light of the body. (a)..." wrong(because this question ends with a full stop)
-"_ is called the light of the body (a)..." correct (because this question does not end with a full stop)
-another example
-"The two holes in your nose are called _. (a)..." wrong
-"The two holes in your nose are called (a)..." correct
-questions may end with question marks, e.g
-"How many noses do you have? (a)..." correct
+2. **Question Quality:** Ensure each question has only one correct answer.  If a question has no correct answer or multiple correct answers, rephrase it to have only one.  If necessary, remove or replace options.
 
-Make all the option lettering enclosed in brackets (e.g (a)... (b)....). Place questions and options on same line. Fix all bad questions, removing or replacing options where necessary, for example:
+3. **Short Answer Questions:** If a question requires a short answer without options, provide a space for the answer using 9 underscores ("________").
 
-This question is good, it has only one correct option
-1. What is 2 + 2?
-    a) 3
-    b) 4
-    c) 5
-    d) 6
+4. **Question Numbering:** Number all questions sequentially.
 
-This question is not good, it has no correct options
-2. Which color is the sky during a clear day?
-    a) Red
-    b) Green
-    c) Yellow
-    d) Purple
+5. **Headings and Passages:** Include headings and passages if present in the original text.
 
-This question is not good, it has more than one correct option
-3. Which of these are prime numbers?
-    a) 2
-    b) 4
-    c) 3
-    d) 9
+6. **Language:** Preserve original language and punctuation.
 
-Respond with ONLY the edited version of the second quiz    
-    
-The first quiz:
+7. **Conciseness:** Make questions clear and concise.
+
+8. **Sectioning:** If short answer or essay questions are requested, these should be in sections (Section A, Section B etc.), with short answer questions coming before essay questions.
+
+
+${numQuestionsClause}
+${numShortAnswerQuestionsClause}
+${numEssayQuestionsClause}
+
+
+**Example Quiz:**
 
 """
 1. When you take care of your body you will look attractive (a) True (b) False
@@ -88,31 +78,19 @@ The first quiz:
 
 9. _ is called the light of the body (a) Hand (b) Mouth (c) Eyes
 
-10. How do you care for the eyes? (a) Visit an eye doctor (b) Rub your eyes with dirty cloth (c) Wash your eyes with dirty water
-
-11. _ is a part of the human body (a) Leaf (b) Nose (c) Stick
-
-12. The trunk is part of the human body from the neck to the _ (a) Leg (b) Waist (c) Hand
-
-13. _ join the head and the lower part of the human body (a) Leg (b) Hand (c) Trunk
-
-14. _ is part of the hands (a) Palm (b) Ankle (c) Heel
-
-15. _ is part of the human leg (a) Wrist (b) Knee (c) Palm
-
-16. _ is the longest part of the human body (a) Hand (b) Neck (c) Legs
-
-17. The hands extend from _ (a) Neck (b) Shoulders (c) Waist
-
-18. Why do we take care of our body? (a) To be dirty (b) To be clean (c) To be hungry
-
-19. _ is a material used to take care of the body (a) Soap (b) Sand (c) Chalk
-
-20. _ is used to care for the teeth (a) Sand (b) Oil (c) Toothbrush
-
 """
 
-The second quiz:
+**Example short answer questions:**
+1. How many sides does a hexagon have? _________
+2. Sum of angles in a triangle. _________
+3. 5 + 4 = _________
+
+**Example essay questions:**
+1. Write the theory of relative posterity.
+2. Describe the relationship of astronomy and sacred geometry
+3. What did the wind tell the sun?
+
+Text to create quiz from:
 
 """
 ${t}

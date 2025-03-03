@@ -4,6 +4,7 @@ import { patchDocument, PatchType, TextRun } from 'docx';
 import { readFileSync, writeFileSync } from 'fs';
 import { G } from '$env/static/private';
 import { SchemaType } from '@google/generative-ai/server';
+import { subjects } from '$lib';
 
 const genAI = new GoogleGenerativeAI(G);
 const grades = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
@@ -43,8 +44,8 @@ const f = async ({ c, g }: { c: string; g: string }) => {
 	const exams = JSON.parse(
 		(
 			await file_model.generateContent(
-				`create a JSON array of EVERY exam given, where each exam object has 'subject' and 'content', the subject being the name of that exam, and the content being the entire exam as a string. Use exactly these subjects were relevant: 'Mathematics', 'English Language', 'Basic Science and Technology', 'Computer Science', 'Social Studies', 'Physical and Health Education', 'National Values', 'Cultural and Creative Arts', 'PreVocational Studies', 'Music', 'French', 'History', 'Religion Studies'
-
+				`return a JSON array of EACH AND EVERY exam given, where each exam object has 'subject' and 'content', the subject being the name of that exam, and the content being the entire exam as a string. Use exactly these subjects were relevant: ${JSON.stringify(subjects)}
+				Include EVERY exam.
 				The exams:
 
 				${c}
@@ -72,7 +73,7 @@ const f = async ({ c, g }: { c: string; g: string }) => {
 	console.log(exams, exams.length, );
   for (const { subject: s, content: t } of exams as { subject: string, content: string }[]) {
 		console.log('run');
-		await new Promise((r) => setTimeout(r, 27000));
+		await new Promise((r) => setTimeout(r, 54000));
 		writeFileSync(
 			`./files/exams/g${grades.indexOf(g) + 1}/${s}.docx`,
 			Buffer.from(await (await run({ g, t, s, model: model })).arrayBuffer())

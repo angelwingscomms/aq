@@ -1,5 +1,6 @@
 <script>
 	import { dev } from '$app/environment';
+	import { subjects } from '$lib';
 
 	let text = '';
 	let grade = 'ONE';
@@ -8,30 +9,22 @@
 	let text2 = '';
 	let grade2 = 'ONE';
 	let loading2 = false; // Added loading state for sendText2
+	let numQuestions = 1; // Added number of questions
+	let numShortQuestions = 0; // Added number of short questions
+	let numEssayQuestions = 0; // Added number of essay questions
 
 	const grades = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
-	const subjects = [
-		'Mathematics',
-		'English Language',
-		'Basic Science and Technology',
-		'Computer Science',
-		'Social Studies',
-		'Physical and Health Education',
-		'National Values',
-		'Cultural and Creative Arts',
-		'PreVocational Studies',
-		'French',
-		'Yoruba',
-		'Igbo',
-		'Hausa'
-	];
+
 
 	async function sendText() {
 		loading = true;
 		const data = {
 			s: subject,
 			g: grade,
-			t: text
+			t: text,
+			n: numQuestions,
+			ns: numShortQuestions,
+			ne: numEssayQuestions
 		};
 
 		const response = await fetch('/q', {
@@ -73,7 +66,10 @@
 		loading2 = true; // Set loading2 to true before sending the request
 		const data = {
 			c: text2,
-			g: grade2
+			g: grade2,
+			n: numQuestions,
+			ns: numShortQuestions,
+			ne: numEssayQuestions
 		};
 
 		const response = await fetch('/f', {
@@ -119,6 +115,18 @@
 				<option value={subjectOption}>{subjectOption}</option>
 			{/each}
 		</select>
+	</div>
+	<div class="mb-2">
+		<label for="numQuestions" class="mb-2 block text-sm font-bold text-gray-700">Number of Questions</label>
+		<input type="number" id="numQuestions" bind:value={numQuestions} class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+	</div>
+	<div class="mb-2">
+		<label for="numShortQuestions" class="mb-2 block text-sm font-bold text-gray-700">Number of Short Questions</label>
+		<input type="number" id="numShortQuestions" bind:value={numShortQuestions} class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+	</div>
+	<div class="mb-2">
+		<label for="numEssayQuestions" class="mb-2 block text-sm font-bold text-gray-700">Number of Essay Questions</label>
+		<input type="number" id="numEssayQuestions" bind:value={numEssayQuestions} class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
 	</div>
 	<textarea
 		class="w-full rounded-md border border-gray-300 bg-gray-100 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
