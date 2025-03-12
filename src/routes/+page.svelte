@@ -15,7 +15,6 @@
 
 	const grades = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
 
-
 	async function sendText() {
 		loading = true;
 		const data = {
@@ -117,16 +116,37 @@
 		</select>
 	</div>
 	<div class="mb-2">
-		<label for="numQuestions" class="mb-2 block text-sm font-bold text-gray-700">Number of Questions</label>
-		<input type="number" id="numQuestions" bind:value={numQuestions} class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+		<label for="numQuestions" class="mb-2 block text-sm font-bold text-gray-700"
+			>Number of Questions</label
+		>
+		<input
+			type="number"
+			id="numQuestions"
+			bind:value={numQuestions}
+			class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+		/>
 	</div>
 	<div class="mb-2">
-		<label for="numShortQuestions" class="mb-2 block text-sm font-bold text-gray-700">Number of Short Questions</label>
-		<input type="number" id="numShortQuestions" bind:value={numShortQuestions} class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+		<label for="numShortQuestions" class="mb-2 block text-sm font-bold text-gray-700"
+			>Number of Short Questions</label
+		>
+		<input
+			type="number"
+			id="numShortQuestions"
+			bind:value={numShortQuestions}
+			class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+		/>
 	</div>
 	<div class="mb-2">
-		<label for="numEssayQuestions" class="mb-2 block text-sm font-bold text-gray-700">Number of Essay Questions</label>
-		<input type="number" id="numEssayQuestions" bind:value={numEssayQuestions} class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+		<label for="numEssayQuestions" class="mb-2 block text-sm font-bold text-gray-700"
+			>Number of Essay Questions</label
+		>
+		<input
+			type="number"
+			id="numEssayQuestions"
+			bind:value={numEssayQuestions}
+			class="rounded border border-gray-300 bg-gray-100 px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+		/>
 	</div>
 	<textarea
 		class="w-full rounded-md border border-gray-300 bg-gray-100 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -172,7 +192,9 @@
 	{#if loading2}
 		<div>Loading...</div>
 	{:else}
-		<button on:click={sendText2}>Send2</button>
+		<button
+			class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+			on:click={sendText2}>Send2</button
+		>
 	{/if}
 </div>
-```

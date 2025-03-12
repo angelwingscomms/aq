@@ -1,13 +1,8 @@
 import { type RequestHandler } from '@sveltejs/kit';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { patchDocument, PatchType, TextRun } from 'docx';
 import { readFileSync } from 'fs';
-import { G } from '$env/static/private';
-import { SchemaType } from '@google/generative-ai/server';
-import { create_questions } from '$lib';
 
-
-
+import { create_questions } from '$lib/create_questions';
 
 async function run({
 	g,
@@ -24,7 +19,7 @@ async function run({
 	ns?: number;
 	ne?: number;
 }) {
-	const q = create_questions({
+	const q = await create_questions({
 		t,
 		n,
 		ns,
