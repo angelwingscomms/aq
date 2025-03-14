@@ -95,6 +95,6 @@ Text to create quiz from:
 """
 ${t}
 """`);
-	console.log('rrt', result.response.text());
+	console.log('questions created',);
 	return result.response.text();
 };
