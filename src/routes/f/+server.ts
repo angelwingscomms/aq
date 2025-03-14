@@ -56,7 +56,7 @@ const f = async ({ c, g, n, ns, ne }: { c: string; g: string; n: number; ns: num
 	);
 	console.log(exams, exams.length, );
 		for (const { subject: s, content: t } of exams as { subject: string, content: string }[]) {
-		console.log('run');
+		console.log('run', s);
 		await new Promise((r) => setTimeout(r, 54000));
 		writeFileSync(
 			`./files/exams/g${grades.indexOf(g) + 1}/${s}.docx`,
